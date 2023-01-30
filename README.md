@@ -16,7 +16,7 @@ Before you begin, ensure you have met the following requirements:
     Select Publish.
     * After a successfull publish, you should see [Weather] table and a couple SPs created. 
 
-## Using <project_name>
+## Using Weather retrieval worker
 
 To use Weather retrieval worker, follow these steps:
 
@@ -39,11 +39,11 @@ metaapp.exe weather --city Vilnius, Riga
 
 ## Notes for the developer
 
-Write tests
-Read more about 
-  * [Worker Services](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers)
-  * [Background tasks](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-7.0&tabs=visual-studio)
-  * [Exceptions & Error handling](https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions)
-  * [Logging](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/loggermessage?view=aspnetcore-7.0)
-  * [More fundamentals](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/?view=aspnetcore-7.0&tabs=windows)
-  * [Authentication & Authorization](https://learn.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-7.0)
+- Write tests
+- Read more about 
+   * [Worker Services](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers)
+   * [Background tasks](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-7.0&tabs=visual-studio)
+   * [Exceptions & Error handling](https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions)
+   * [Logging](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/loggermessage?view=aspnetcore-7.0)
+   * [More fundamentals](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/?view=aspnetcore-7.0&tabs=windows)
+   * [Authentication & Authorization](https://learn.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-7.0)
