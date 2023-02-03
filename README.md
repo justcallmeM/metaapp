@@ -16,6 +16,8 @@ Before you begin, ensure you have met the following requirements:
     Select Publish.
     * After a successfull publish, you should see [Weather] table and a couple SPs created. 
 
+* I am not sure if you'll need to do it, but I had to open the properties of `appsettings.json` and set `Copy to Output Directory` to `Copy always`.
+
 ## Using Weather retrieval worker
 
 To use Weather retrieval worker, follow these steps:
