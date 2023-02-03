@@ -39,7 +39,6 @@ metaapp.exe weather --city Vilnius, Riga
 
 ## Notes for the developer
 
-- Write tests
 - Read more about 
    * [Worker Services](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers)
    * [Background tasks](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-7.0&tabs=visual-studio)
