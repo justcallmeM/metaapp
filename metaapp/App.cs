@@ -92,7 +92,7 @@
                     case "city":
                         foreach (var city in argument.Value)
                         {
-                            requests.Add(new WeatherRequest() { CityName = city });
+                            requests.Add(new WeatherRequest(city));
                         }
                         break;
                     default:
@@ -120,6 +120,11 @@
 
         private static void DisplayWeatherData(IEnumerable<WeatherResponse> weatherData)
         {
+            if(!weatherData.Any())
+            {
+                Console.WriteLine("No data was retrieved");
+            }
+
             foreach (WeatherResponse response in weatherData.ToList())
             {
                 Console.WriteLine(

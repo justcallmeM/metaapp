@@ -6,7 +6,7 @@
     using Interfaces;
     using Serilog;
 
-    public class WeatherApiWeatherClient : WeatherApiBaseClient, IWeatherApiWeatherClient
+    public class WeatherApiWeatherClient : BaseApiClient, IWeatherApiWeatherClient
     {
         public WeatherApiWeatherClient(
             HttpClient httpClient,
@@ -16,16 +16,21 @@
         public async Task<IEnumerable<WeatherResponse>> GetWeatherAsync(
             List<WeatherRequest> requests)
         {
-            List<WeatherResponse> weatherData = new();
+            List<WeatherResponse> responses = new();
 
             foreach (var request in requests)
             {
-                weatherData.Add(
-                    await GetAsync<WeatherResponse>(ExternalClient.WeatherAPI.Weather.Current.Get(request))
-                );
+                try
+                {
+                    responses.Add(await GetAsync<WeatherResponse>(ExternalClient.WeatherAPI.Weather.Current.Get(request)));
+                }
+                catch (ArgumentNullException ex)
+                {
+                    logger.Error($"An error occured while processing user request. Location: {ex.Message}, Exception: {ex.StackTrace}");
+                }
             }
 
-            return weatherData;
+            return responses;
         }
     }
 }

@@ -19,11 +19,14 @@
             .ConfigureAppConfiguration(config => {
                 config.AddJsonFile($"{Environment.CurrentDirectory}\\appsettings.json");
             })
+            .UseSerilog((context, configuration) => {
+                configuration
+                    .ReadFrom.Configuration(context.Configuration);
+            })
             .ConfigureServices(services => {
                 services.AddSingleton<IApp, App>();
                 services.AddSingleton<IWeatherDataBehaviour, WeatherDataBehaviour>();
                 services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
-                services.AddSingleton(Log.Logger);
 
                 services.AddHttpClient<IWeatherApiWeatherClient, WeatherApiWeatherClient>();
             })

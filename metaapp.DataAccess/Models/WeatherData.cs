@@ -14,7 +14,7 @@
         double UltravioletIndex)
     {
         public WeatherData() 
-            : this(default, default, default, default, default, default, default, default, default, default, default) 
+            : this(default!, default!, default!, default, default, default, default!, default, default, default, default) 
         { }
     }
 }

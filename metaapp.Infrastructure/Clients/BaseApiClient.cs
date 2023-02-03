@@ -5,52 +5,110 @@
     using System.Text;
     using Application.Common.Constants;
     using Application.Common.Exceptions;
+    using Serilog;
 
     public abstract class BaseApiClient
     {
-        protected readonly HttpClient HttpClient;
+        protected readonly HttpClient httpClient;
+        protected readonly ILogger logger;
 
         protected BaseApiClient(
-            HttpClient httpClient)
+            HttpClient httpClient,
+            ILogger logger)
         {
             httpClient.Timeout = TimeSpan.FromSeconds(15);
 
-            HttpClient = httpClient;
+            this.httpClient = httpClient;
+            this.logger = logger;
         }
 
         protected virtual async Task<TResponse> GetAsync<TResponse>(string uri)
         {
-            var response = await ExecuteRequestAsync(HttpMethod.Get, uri);
+            HttpResponseMessage? responseMessage = null;
 
-            return await JsonSerializer.DeserializeAsync<TResponse>(
-                response.Content.ReadAsStream());
+            try
+            {
+                responseMessage = await ExecuteRequestAsync(HttpMethod.Get, uri);
+            }
+            catch (ExternalApiException ex)
+            {
+                logger.Error(ex.ToString());
+            }
+
+            var stream = responseMessage?.Content.ReadAsStream();
+
+            if(stream is not null)
+            {
+                var result = await JsonSerializer.DeserializeAsync<TResponse>(stream);
+                return result!;
+            }
+
+            throw new ArgumentNullException(nameof(stream), $"of {nameof(responseMessage)} - content");
         }
 
-        protected virtual async Task<TResponse> PostAsync<TRequest, TResponse>(
+        protected virtual async Task<TResponse?> PostAsync<TRequest, TResponse>(
             string uri, TRequest request)
             where TRequest : class
         {
-            var response = await ExecuteRequestAsync(HttpMethod.Post, uri, request);
+            HttpResponseMessage? responseMessage = null;
 
-            //throw an exception here. 
-            //log as well.
-            return await JsonSerializer.DeserializeAsync<TResponse>(
-                response.Content.ReadAsStream());
+            try
+            {
+                responseMessage = await ExecuteRequestAsync(HttpMethod.Post, uri, request);
+            }
+            catch (ExternalApiException ex)
+            {
+                logger.Error(ex.ToString());
+            }
+
+            var stream = responseMessage?.Content.ReadAsStream();
+
+            if (stream is not null)
+            {
+                var result = await JsonSerializer.DeserializeAsync<TResponse>(stream);
+                return result!;
+            }
+
+            throw new ArgumentNullException(nameof(stream), $"of {nameof(responseMessage)} - content");
+
         }
 
         protected virtual async Task<TResponse> PatchAsync<TRequest, TResponse>(
             string uri, TRequest request)
             where TRequest : class
         {
-            var response = await ExecuteRequestAsync(HttpMethod.Patch, uri, request);
+            HttpResponseMessage? responseMessage = null;
 
-            return await JsonSerializer.DeserializeAsync<TResponse>(
-                response.Content.ReadAsStream());
+            try
+            {
+                responseMessage = await ExecuteRequestAsync(HttpMethod.Patch, uri, request);
+            }
+            catch (ExternalApiException ex)
+            {
+                logger.Error(ex.ToString());
+            }
+
+            var stream = responseMessage?.Content.ReadAsStream();
+
+            if (stream is not null)
+            {
+                var result = await JsonSerializer.DeserializeAsync<TResponse>(stream);
+                return result!;
+            }
+
+            throw new ArgumentNullException(nameof(stream), $"of {nameof(responseMessage)} - content");
         }
 
-        protected virtual Task Delete(string uri)
+        protected virtual async Task DeleteAsync(string uri)
         {
-            return ExecuteRequestAsync(HttpMethod.Delete, uri);
+            try
+            {
+                await ExecuteRequestAsync(HttpMethod.Delete, uri);
+            }
+            catch (ExternalApiException ex)
+            {
+                logger.Error(ex.ToString());
+            }
         }
 
         protected virtual async Task<HttpResponseMessage> ExecuteRequestAsync(
@@ -68,7 +126,7 @@
                     CommonConstant.MediaTypes.Json);
             }
 
-            var response = await HttpClient.SendAsync(httpRequest);
+            var response = await httpClient.SendAsync(httpRequest);
 
             await EnsureSuccessAsync(response, requestBody);
 
@@ -96,7 +154,7 @@
 
             throw new ExternalApiException(
                 response.StatusCode,
-                response.RequestMessage.RequestUri,
+                response.RequestMessage!.RequestUri!,
                 responseContent,
                 requestBody
             );
