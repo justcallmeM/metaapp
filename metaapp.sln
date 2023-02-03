@@ -13,6 +13,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "metaapp.Database", "metaapp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "metaapp.Infrastructure", "metaapp.Infrastructure\metaapp.Infrastructure.csproj", "{6955F5C3-B981-4628-927D-BA16F5C5385B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "metaapp.Tests", "metaapp.Tests\metaapp.Tests.csproj", "{D60C0AD1-61C9-4228-8653-AD4704EA5566}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{6955F5C3-B981-4628-927D-BA16F5C5385B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6955F5C3-B981-4628-927D-BA16F5C5385B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6955F5C3-B981-4628-927D-BA16F5C5385B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D60C0AD1-61C9-4228-8653-AD4704EA5566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60C0AD1-61C9-4228-8653-AD4704EA5566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60C0AD1-61C9-4228-8653-AD4704EA5566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60C0AD1-61C9-4228-8653-AD4704EA5566}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

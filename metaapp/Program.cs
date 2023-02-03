@@ -12,6 +12,8 @@
     using Infrastructure.Clients.WeatherAPI;
     using Infrastructure.Clients.WeatherAPI.Interfaces;
     using Interfaces;
+    using metaapp.Infrastructure.Services.Weather.Interfaces;
+    using metaapp.Infrastructure.Services.WeatherRetrieval;
 
     internal class Program
     {
@@ -26,6 +28,7 @@
             .ConfigureServices(services => {
                 services.AddSingleton<IApp, App>();
                 services.AddSingleton<IWeatherDataBehaviour, WeatherDataBehaviour>();
+                services.AddSingleton<IWeatherRetrievalService, WeatherRetrievalService>();
                 services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 
                 services.AddHttpClient<IWeatherApiWeatherClient, WeatherApiWeatherClient>();
