@@ -32,17 +32,17 @@
             );
 
             sb.AppendLine();
-            sb.AppendLine("\tData:");
-            sb.AppendLine($"\t\t{nameof(StatusCode)}: {StatusCode} ({(int)StatusCode})");
+            sb.AppendLine("Data:");
+            sb.AppendLine($"{nameof(StatusCode)}: {StatusCode} ({(int)StatusCode})");
 
             if (CalledUri is not null)
-                sb.AppendLine($"\t\t{nameof(CalledUri)}: {CalledUri}");
+                sb.AppendLine($"{nameof(CalledUri)}: {CalledUri}");
 
             if (ResponseContent is not null)
-                sb.AppendLine($"\t\t{nameof(ResponseContent)}: {ResponseContent}");
+                sb.AppendLine($"{nameof(ResponseContent)}: {ResponseContent}");
 
             if (RequestBody is not null)
-                sb.AppendLine($"\t\t{nameof(RequestBody)}: {ResponseContent}");
+                sb.AppendLine($"{nameof(RequestBody)}: {ResponseContent}");
 
             if (StackTrace is not null)
                 sb.AppendLine(StackTrace);

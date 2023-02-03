@@ -122,7 +122,7 @@
         {
             if(!weatherData.Any())
             {
-                Console.WriteLine("No data was retrieved");
+                Console.WriteLine("No data was retrieved, application is going to continue working.");
             }
 
             foreach (WeatherResponse response in weatherData.ToList())
