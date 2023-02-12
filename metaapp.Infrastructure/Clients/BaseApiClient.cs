@@ -46,7 +46,7 @@
             throw new ArgumentNullException(nameof(stream), $"of {nameof(responseMessage)} - content");
         }
 
-        protected virtual async Task<TResponse?> PostAsync<TRequest, TResponse>(
+        protected virtual async Task<TResponse> PostAsync<TRequest, TResponse>(
             string uri, TRequest request)
             where TRequest : class
         {
@@ -70,7 +70,6 @@
             }
 
             throw new ArgumentNullException(nameof(stream), $"of {nameof(responseMessage)} - content");
-
         }
 
         protected virtual async Task<TResponse> PatchAsync<TRequest, TResponse>(
